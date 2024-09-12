@@ -1,0 +1,68 @@
+<div class="container">
+    <!-- Filters Section -->
+    <div class="filters">
+        <a routerLink="/catalog" [queryParams]="{filter: 'electronics'}" routerLinkActive="active"
+            class="button">Electronics</a>
+        <a routerLink="/catalog" [queryParams]="{filter: 'jewelery'}" routerLinkActive="active"
+            class="button">Jewelry</a>
+        <a routerLink="/catalog" [queryParams]="{filter: 'men\'s clothing'}" routerLinkActive="active"
+            class="button">Men's Clothing</a>
+        <a routerLink="/catalog" [queryParams]="{filter: 'women\'s clothing'}" routerLinkActive="active"
+            class="button">Women's Clothing</a>
+        <a routerLink="/catalog" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+            class="button">All</a>
+    </div>
+
+    <!-- Product List Section -->
+    <ul class="products">
+        <li class="product-item" *ngFor="let product of getFilteredProducts()">
+            <div class="product">
+                <a routerLink="/productdetails">
+                    <div class="product-picture">
+                        <img src="{{ product.image }}" [alt]="product.title" class="hover-image" />
+                    </div>
+                </a>
+
+                <!-- Product Information -->
+                <div class="product-info">
+                    <a routerLink="/productdetails"></a>
+
+                    <!-- Product Title -->
+                    <div class="title-container">
+                        <div *ngIf="product.title.length < 35" class="title">{{ product.title }}</div>
+                        <div *ngIf="product.title.length >= 30" class="animated-title">
+                            <div class="product-title">
+                                <span class="initial-title">{{ product.title | slice:0:30}}</span>
+                                <span class="remaining-title">{{ product.title | slice:30 }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- Product Description -->
+                    <div class="product-description">
+                        <span class="initial-description">{{ product.description | slice:0:50}}</span>
+                        <span class="remaining-description">{{ product.description | slice:50 }}</span>
+                    </div>
+
+                    <hr>
+
+                    <!-- Product Details -->
+                    <div class="product-category">Category: {{ product.category }}</div>
+                    <div class="product-rating">Rating: {{ product.rating.rate }}</div>
+                    <div class="product-price">Price: {{ product.price | currency:'USD' }}</div>
+
+                    <hr>
+
+                    <!-- Action Buttons -->
+                    <div class="quantityButton">
+                        <button (click)="addToCart(product)" class="cta">Add to Cart</button>
+                        <button (click)="productDetails(product)" routerLink="/productdetails"
+                            class="cta product-btn">Details</button>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

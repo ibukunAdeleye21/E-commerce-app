@@ -1,0 +1,61 @@
+<!-- <div class="container">
+    <form class="form" (ngSubmit)="register()">
+        <div class="register">Register</div>
+        <div class="sub-text">to acquire awesome bots</div>
+
+        <input name="firstname" type="text" required placeholder="FirstName" [(ngModel)]="registerCredentials.firstname">
+
+        <input name="lastname" required type="text" placeholder="LastName" [(ngModel)]="registerCredentials.lastname">
+
+        <input name="email" type="text" placeholder="E-mail" [(ngModel)]="registerCredentials.email">
+
+        <input name="phonenumber" type="text" placeholder="Mobile Number" [(ngModel)]="registerCredentials.phonenumber">
+
+        <input name="password" type="password" placeholder="Password" [(ngModel)]="registerCredentials.password">
+
+        <div class="button" type="submit">
+            <button type="submit" class="button-cta">Register</button>
+        </div>
+
+    </form>
+</div> -->
+
+<div class="container">
+    <div class="register-box">
+        <div class="register-header">
+            <h2 class="register-title">Register</h2>
+            <p class="sub-text">buy some items</p>
+        </div>
+
+        <form class="form" (ngSubmit)="register()">
+            <div class="input-group">
+                <input name="firstname" type="text" required placeholder="First Name"
+                    [(ngModel)]="registerCredentials.firstname" class="input-field">
+            </div>
+            <div class="input-group">
+                <input name="lastname" required type="text" placeholder="Last Name"
+                    [(ngModel)]="registerCredentials.lastname" class="input-field">
+            </div>
+            <div class="input-group">
+                <input name="email" type="email" placeholder="Email" [(ngModel)]="registerCredentials.email"
+                    class="input-field">
+            </div>
+            <div class="input-group">
+                <input name="phonenumber" type="text" placeholder="Mobile Number"
+                    [(ngModel)]="registerCredentials.phonenumber" class="input-field">
+            </div>
+            <div class="input-group">
+                <input name="password" type="password" placeholder="Password" [(ngModel)]="registerCredentials.password"
+                    class="input-field">
+            </div>
+
+            <div *ngIf="registerError" class="registerError">{{ registerError }}</div>
+
+            <div *ngIf="registerSuccess" class="registerSuccess">{{ registerSuccess }}</div>
+
+            <div class="button-group">
+                <button type="submit" class="button-cta">Register</button>
+            </div>
+        </form>
+    </div>
+</div>

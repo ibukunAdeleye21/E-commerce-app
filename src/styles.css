@@ -1,0 +1,99 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #444;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    font-size: 20px;
+}
+
+p {
+    font-size: 15px;
+}
+
+button {
+    font-size: 12px;
+    padding: 15px 25px;
+    background-color: #5cadd2;
+    color: #fff;
+    border: 0;
+    box-shadow: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+a.active {
+    padding-bottom: 5px;
+    border-bottom: 2px solid #d25ca1;
+}
+
+a.button.active {
+    padding-bottom: 5px;
+    border-bottom: 2px solid #d25ca1;
+}
+
+a:visited {
+    color: #444;
+}
+
+a:hover {
+    color: #5cadd2;
+}
+
+a.cta {
+    color: #d25ca1;
+}
+
+a.cta:visited {
+    color: #d25ca1;
+}
+
+a.cta:hover {
+    color: #f27cb1;
+}
+
+.cta {
+    color: #d25ca1;
+}
+
+a.cta {
+    color: #d25ca1;
+}
+
+a.cta:visited {
+    color: #d25ca1;
+}
+
+a.cta:hover {
+    color: #f27cb1;
+}
+
+a.button {
+    font-size: 15px;
+    padding: 15px 25px;
+    background-color: #5cadd2;
+    color: #fff;
+    border: 0;
+    box-shadow: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+a.button:hover {
+    color: #1c6d92;
+}
+
+.bold {
+    font-weight: bold;
+}

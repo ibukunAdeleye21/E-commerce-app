@@ -1,0 +1,121 @@
+/* Notification container */
+.notification {
+    position: fixed;
+    top: -50px;
+    /* Hidden at first */
+    left: 0;
+    right: 0;
+    background-color: #f39c12;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    z-index: 1000;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: top 0.5s ease-in-out;
+}
+
+/* When active, it will slide down */
+.notification.show {
+    top: 50px;
+}
+
+.cart-container {
+    margin: 10px 20px 20px 20px;
+}
+
+.cart-header {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.cart-content {
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+    width: 100%;
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.table th,
+.table td {
+    padding: 15px;
+    vertical-align: middle;
+}
+
+.table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.product-img {
+    width: 80px;
+    height: auto;
+}
+
+.description-cell {
+    width: 25%;
+    text-align: left;
+}
+
+.quantity-input {
+    width: 60px;
+    text-align: center;
+}
+
+.cart-summary {
+    text-align: right;
+}
+
+.summary-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.summary-actions .btn {
+    margin: 0 10px;
+}
+
+.grand-total {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.empty-cart {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 25px;
+    padding: 25px;
+}
+
+.empty-cart-content {
+    text-align: center;
+}
+
+.empty-cart-content img {
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+.empty-cart-content h4,
+.empty-cart-content h6 {
+    font-weight: normal;
+}
+
+.empty-cart-content .btn {
+    margin-top: 20px;
+    padding: 12px 30px;
+    border-radius: 25px;
+}

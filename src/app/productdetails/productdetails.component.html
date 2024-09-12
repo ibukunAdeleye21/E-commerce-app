@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="breadcrumb">
+        <a routerLink="/home">Home</a>
+        <span>>></span>
+        <a routerLink="/catalog">Catalog</a>
+        <span>>></span>
+        <a href="">{{ product.category }}</a>
+        <span>>></span>
+        <span>{{ product.title.slice(0, 30) }}</span>
+    </div>
+
+    <div class="product-detail">
+        <div class="image-section">
+            <img src="{{ product.image }}" alt="{{ product.title }}">
+        </div>
+
+        <div class="details-section">
+            <h1>{{ product.title }}</h1>
+            <div class="rating-section">
+                <span class="rating">{{ product.rating.rate }} ★</span>
+                <span class="count">({{ product.rating.count }} reviews)</span>
+            </div>
+            <p class="description">{{ product.description }}</p>
+            <div class="price">{{ product.price | currency:'USD' }}</div>
+
+            <div class="quantity-section">
+                <label for="quantity">Quantity: </label>
+                <input id="quantity" type="number" class="quantity-input" min="1" max="100" [(ngModel)]="qty"
+                    (ngModelChange)="onQtyChange($event)">
+            </div>
+
+            <div class="action-buttons">
+                <button (click)="addCart(product)" class="btn btn-cart">Add To Cart</button>
+                <button class="btn btn-buy">Buy It Now</button>
+            </div>
+        </div>
+    </div>
+</div>

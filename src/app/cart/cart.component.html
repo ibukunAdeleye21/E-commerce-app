@@ -1,0 +1,68 @@
+<div id="notification" class="notification">
+    You have to be logged in to purchase
+</div>
+
+<ng-container *ngIf="cart.length > 0">
+    <div class="container cart-container">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+        </div>
+        <div class="cart-content">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Product</th>
+                        <th>Image</th>
+                        <th>Details</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of cart; let i = index">
+                        <td>{{ i+1 }}</td>
+                        <td>{{ item.product.title }}</td>
+                        <td><img class="product-img" [src]="item.product.image" alt="{{ item.product.title }}"></td>
+                        <td class="description-cell">{{ item.product.description }}</td>
+                        <td>{{ item.product.price | currency:'USD' }}</td>
+                        <td>
+                            <input class="quantity-input" type="number" min="0" max="100" [(ngModel)]="item.qty"
+                                (ngModelChange)="updateGrandTotal()">
+                        </td>
+                        <td>{{ getTotalPriceForProduct(item) | currency:'USD' }}</td>
+                        <td>
+                            <button class="btn btn-danger" (click)="removeProduct(item)">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="cart-summary">
+                        <td colspan="4"></td>
+                        <td colspan="4" class="summary-actions">
+                            <button class="btn btn-danger" (click)="emptyCart()">Empty Cart</button>
+                            <button routerLink="/catalog" class="btn btn-primary">Shop More</button>
+                            <button (click)="order()" class="btn btn-success">Checkout</button>
+                            <strong class="grand-total">Grand Total: {{ grandTotal | currency:'USD' }}</strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="cart.length == 0">
+    <div class="container empty-cart">
+        <div class="empty-cart-content">
+            <h5>My Cart</h5>
+            <img src="https://rukminim1.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90"
+                alt="Empty Cart">
+            <h4>Your cart is empty!</h4>
+            <h6>Add items to it now</h6>
+            <button routerLink="/catalog" class="btn btn-primary">Shop Now</button>
+        </div>
+    </div>
+</ng-container>

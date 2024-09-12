@@ -1,0 +1,163 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 12vh;
+    padding: 0px 20px 0px 20px;
+    border-bottom: 2px solid #818285;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.fa-solid {
+    color: blue;
+}
+
+.fa-truck-fast {
+    font-size: 28px;
+    margin-right: 10px;
+}
+
+.searchicon {
+    position: relative;
+}
+
+.searchicon .fa-magnifying-glass {
+    font-size: 20px;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+}
+
+.search {
+    font-size: 15px;
+    width: 25vw;
+    height: 7vh;
+    margin-left: 20px;
+    padding-left: 10px;
+    border-radius: 3px;
+}
+
+.cart {
+    margin-right: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cart h3 {
+    margin-right: 30px;
+}
+
+.shopping {
+    margin: 0px 30px 0px 30px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.shopping:hover {
+    color: blue;
+}
+
+.fa-cart-plus {
+    font-size: 30px;
+}
+
+.cart-count {
+    font-size: 15px;
+    position: absolute;
+    left: 35px;
+    bottom: 20px;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: red;
+}
+
+a.active {
+    padding-bottom: 2px;
+    border-bottom: 3px solid blue;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
+    margin-left: -500px;
+}
+
+.usertoggle {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-left: -320px;
+}
+
+.right * {
+    margin-left: 25px;
+}
+
+.usertoggle img {
+    height: 40px;
+    cursor: pointer;
+}
+
+.sign-out {
+    position: absolute;
+    top: 60px;
+    right: 30px;
+}
+
+.usertoggle {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    /* Allows absolute positioning of the menu */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.usertoggle img {
+    height: 40px;
+    cursor: pointer;
+}
+
+.user-menu {
+    position: absolute;
+    top: 50px;
+    /* Position the menu below the profile image */
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* Adds space between buttons */
+}
+
+.user-menu button {
+    padding: 10px 15px;
+    background-color: blue;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 14px;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.user-menu button:hover {
+    background-color: #c8c8c8;
+}
+
+h3 {
+    margin: 0;
+}

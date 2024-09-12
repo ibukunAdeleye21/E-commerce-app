@@ -1,0 +1,39 @@
+<div class="home-container">
+    <div class="hero-section">
+        <div class="hero-image"></div>
+    </div>
+
+    <hr class="divider">
+
+    <section class="categories-section">
+        <ul class="categories-list">
+            <li class="category-item">
+                <a routerLink="/catalog" [queryParams]="{filter: 'electronics'}" class="category-link">
+                    <img src="/assets/images/camera.jpg" alt="Electronics">
+                    <div class="category-title">Electronics</div>
+                </a>
+            </li>
+
+            <li class="category-item">
+                <a routerLink="/catalog" [queryParams]="{filter: 'jewelery'}" class="category-link">
+                    <img src="/assets/images/jewelry.jpg" alt="Jewelry">
+                    <div class="category-title">Jewelry</div>
+                </a>
+            </li>
+
+            <li class="category-item">
+                <a routerLink="/catalog" [queryParams]="{filter: 'men\'s clothing'}" class="category-link">
+                    <img src="/assets/images/suit.jpg" alt="Men's clothing">
+                    <div class="category-title">Men's Clothing</div>
+                </a>
+            </li>
+
+            <li class="category-item">
+                <a routerLink="/catalog" [queryParams]="{filter: 'women\'s clothing'}" class="category-link">
+                    <img src="/assets/images/women.jpg" alt="Women's clothing">
+                    <div class="category-title">Women's Clothing</div>
+                </a>
+            </li>
+        </ul>
+    </section>
+</div>

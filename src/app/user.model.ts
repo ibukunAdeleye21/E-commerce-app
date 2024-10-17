@@ -1,3 +1,5 @@
+import { IProduct } from "./catalog/product.model";
+
 export interface IUserRegisterCredentials {
     firstname: string;
     lastname: string;

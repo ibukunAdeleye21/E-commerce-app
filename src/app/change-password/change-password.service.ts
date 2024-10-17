@@ -14,8 +14,10 @@ export class ChangePasswordService {
     return localStorage.getItem('authToken');
   }
 
+  
+
   changePassword(oldPassword: string, newPassword: string): Observable<string> {
-    const body = {
+    const changePasswordDto = {
       OldPassword: oldPassword,
       NewPassword: newPassword
     };
@@ -24,7 +26,6 @@ export class ChangePasswordService {
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
 
-    return this.http
-      .post<string>(`${this.baseUrl}/account/changepassword`, body, { headers });
+    return this.http.post<string>(`${this.baseUrl}/account/changepassword`, changePasswordDto, { headers, responseType: 'text' as 'json' })
   }
 }

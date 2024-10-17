@@ -19,9 +19,11 @@ export class SignInComponent {
   ngOnInit() {}
 
   signIn() {
+    this.signInError = false;
     this.userService.signIn(this.userCredentials).subscribe({
       next: () => {
-        this.userService.isUserLoggedIn = true;
+        this.userService.isUserLoggedIn.next(true);
+
         // navigate to catalog page
         this.router.navigate(['/catalog']);
       },

@@ -5,6 +5,7 @@ import { ProductService } from './product.service';
 import { BehaviorSubject } from 'rxjs';
 import { ProductdetailsService } from '../productdetails/productdetails.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'bot-catalog',
@@ -16,13 +17,15 @@ export class CatalogComponent {
   filter: string = '';
   categories: string[] =["electronics", "jewelery", "men's clothing", "women's clothing", ""]; 
   productId!: number;
+  isUserLoggedIn: boolean = false;
 
 
   constructor(
     private cartSvc: CartService, 
     private productSvc: ProductService, 
     private productDetailsSvc: ProductdetailsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userSvc: UserService
   ) {
   }
 
@@ -33,10 +36,13 @@ export class CatalogComponent {
     this.route.queryParams.subscribe((params) => {
       this.filter = params['filter'] ?? '';
     });
+    this.userSvc.getIsUserLoggedIn().subscribe({
+      next: (user) => (this.isUserLoggedIn = user)
+    });
   }
 
   addToCart(product: IProduct) {
-    this.cartSvc.add(product);
+    this.cartSvc.add(product, this.isUserLoggedIn);
   }
 
   getFilteredProducts() {

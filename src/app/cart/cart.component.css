@@ -1,24 +1,7 @@
-/* Notification container */
-.notification {
-    position: fixed;
-    top: -50px;
-    /* Hidden at first */
-    left: 0;
-    right: 0;
-    background-color: #f39c12;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    font-size: 18px;
-    font-family: Arial, sans-serif;
-    z-index: 1000;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: top 0.5s ease-in-out;
-}
-
-/* When active, it will slide down */
-.notification.show {
-    top: 50px;
+#notificationcart-container {
+    position: relative;
+    border: 2px solid blue;
+    overflow: hidden;
 }
 
 .cart-container {

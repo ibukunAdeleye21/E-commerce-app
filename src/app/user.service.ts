@@ -14,12 +14,16 @@ export class UserService {
   private baseUrl = 'https://localhost:7071/api';
   private user: BehaviorSubject<IUser | null> = new BehaviorSubject<IUser | null>(null);
   showSignOutMenu: boolean = false;
-  isUserLoggedIn: boolean = false;
+  isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private cartSvc: CartService) { }
 
   getUser() {
     return this.user.asObservable();
+  }
+
+  getIsUserLoggedIn() {
+    return this.isUserLoggedIn.asObservable();
   }
 
   register(registerCredentials: IUserRegisterCredentials): Observable<string> {
@@ -86,6 +90,7 @@ export class UserService {
   signOut() {
     this.user.next(null);
     this.showSignOutMenu = false;
+    this.cartSvc.clearCart();
   }
 }
 

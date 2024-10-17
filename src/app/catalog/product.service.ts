@@ -13,4 +13,7 @@ export class ProductService {
   getProducts(): Observable<IProduct[]> {
     return this.http.get<IProduct[]>('https://localhost:7071/api/products');
   }
+
+  // 
+  // http://adeleyejohn-001-site1.ctempurl.com/api/products
 }

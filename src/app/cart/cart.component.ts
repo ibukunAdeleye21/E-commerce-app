@@ -5,6 +5,7 @@ import { CartService } from './cart.service';
 import { ProductdetailsService } from '../productdetails/productdetails.service';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { OrderService } from '../order/order.service';
 
 @Component({
   selector: 'bot-cart',
@@ -14,12 +15,16 @@ import { Router } from '@angular/router';
 export class CartComponent implements OnInit {
   cart: IProductCart[] = [];
   grandTotal: number = 0;
+  showNotification: boolean = false;
+  notificationMessage: string = '';
+  isUserLoggedIn: boolean = false;
 
   constructor(
     private cartService: CartService, 
     private http: HttpClient,
     private productdetailsService: ProductdetailsService,
     private userSvc: UserService,
+    private orderService: OrderService,
     private router: Router) { 
   }
 
@@ -28,10 +33,13 @@ export class CartComponent implements OnInit {
       { this.cart = cart;
       this.updateGrandTotal();
     });
+    this.userSvc.getIsUserLoggedIn().subscribe({
+      next: (user) => (this.isUserLoggedIn = user)
+    });
   }
-  
+
   add(product: IProduct) {
-    this.cartService.add(product);
+    this.cartService.add(product, this.isUserLoggedIn);
   }
 
   // addFromProductDetails(product: IProduct) {
@@ -58,14 +66,32 @@ export class CartComponent implements OnInit {
     )
   }
 
-  order() {
-    if (this.userSvc.isUserLoggedIn == true)
+  checkOut() {
+    if (this.isUserLoggedIn)
     {
-      this.router.navigate(['/order']);
+      this.orderService.createOrder(this.cart, this.grandTotal).subscribe({
+        next: (response) => {
+          // Handle 200 Ok responses
+          console.log("Order successfully created.")
+          this.orderService.getOrder();
+          this.router.navigate(['/order']);
+        },
+        // Handle 400 responses
+        error: (err) => {
+          console.log("Failed to create order");
+        }
+      })
     }
     else {
-      console.log("Please log in to purchase");
-      this.router.navigate(['/sign-in']);
+      this.notificationMessage = "You have to be logged in to purchase";
+      
+      this.showNotification = true;
+
+      // Wait for 3 seconds, then hide the notification and redirect
+      setTimeout(() => {
+        this.showNotification = false;
+        this.router.navigate(['/sign-in']);
+      }, 3000);
     }
   }
 
@@ -75,13 +101,12 @@ export class CartComponent implements OnInit {
   }
 
   removeProduct(item: IProductCart) {
-    this.cartService.remove(item);
+    this.cartService.remove(item, this.isUserLoggedIn);
     this.updateGrandTotal();
   }
 
   emptyCart() {
-    this.cartService.empty();
+    this.cartService.empty(this.isUserLoggedIn);
     this.updateGrandTotal();
-  }
-
+  };
 }

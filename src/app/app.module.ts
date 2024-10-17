@@ -16,7 +16,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { OrderComponent } from './order/order.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -31,15 +31,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ResetPasswordComponent,
     ForgotPasswordComponent,
     OrderComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule,
-    BrowserAnimationsModule
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

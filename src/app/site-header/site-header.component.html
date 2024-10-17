@@ -1,7 +1,3 @@
-<header>
-    
-</header>
-
 <div class="container">
     <div class="search-container">
         <i class="fa-solid fa-truck-fast"></i>
@@ -11,7 +7,8 @@
             <i class="fa-solid fa-magnifying-glass"></i>
         </div>
     </div>
-    <div class="cart">
+    
+    <div class="cart" *ngIf="!user">
         <h3><a routerLink="/home" routerLinkActive="active">Home</a></h3>
 
         <h4><a routerLink="/catalog" routerLinkActive="active">Catalog</a></h4>
@@ -20,10 +17,26 @@
             <i class="fa-solid fa-cart-plus"></i>
             <div class="cart-count">{{ cartLength }}</div>
         </a>
+        <h4><a routerLink="/order" routerLinkActive="active">Order</a></h4>
     </div>
+
+    <div class="cart-user" *ngIf="user">
+        <h3><a routerLink="/home" routerLinkActive="active">Home</a></h3>
+        
+        <h3><a routerLink="/catalog" routerLinkActive="active">Catalog</a></h3>
+        
+        <a routerLink="/cart" class="shopping" routerLinkActive="cart-active">
+            <i class="fa-solid fa-cart-plus"></i>
+            <div class="cart-user-count">{{ cartLength }}</div>
+        </a>
+
+        <h3><a routerLink="/order" routerLinkActive="active">Order</a></h3>
+    </div>
+
     <div class="right" *ngIf="!user">
         <h4><a routerLink="/sign-in" routerLinkActive="active">Sign In</a></h4>
     </div>
+    
     <div class="usertoggle" *ngIf="user">
         <h3>Welcome {{user.firstname}}</h3>
         <img src="/assets/images/profile.png" (click)="toggleSignOutMenu()" alt="profile" />
@@ -31,6 +44,5 @@
             <button (click)="signOut()">Sign Out</button>
             <button routerLink="/changepassword">Change Password</button>
         </div>
-        
     </div>
 </div>

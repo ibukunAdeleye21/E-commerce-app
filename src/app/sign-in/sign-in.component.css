@@ -19,6 +19,10 @@
     border: 2px solid blue;
 }
 
+.login-container {
+    border: 2px solid green;
+}
+
 /* .login-container {
     border: 2px solid green;
     display: flex;
@@ -37,7 +41,7 @@
     text-align: center;
     /* max-width: 700px; */
     /* height: 700px; */
-    width: 65%;
+    width: 30%;
     border: 2px solid black;
 }
 
@@ -61,15 +65,33 @@ label {
     font-weight: 1.5rem;
 }
 
+.input-group {
+    width: 100%;
+    /* Ensure the input-group takes full width */
+    margin-bottom: 15px;
+    /* Add some space between input groups */
+}
+
+em.error {
+    padding: 1px 5px;
+    background-color: black;
+    color: white;
+    font-style: normal;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 input[type="email"],
 input[type="password"] {
     width: 100%;
-    height: 30px;
+    height: 50px;
     padding: 0.75rem;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1.3rem;
     outline: none;
+    box-sizing: border-box;
 }
 
 .password-icon {
@@ -121,4 +143,11 @@ input[type="password"] {
 
 .login-button:hover {
     background-color: #444;
+}
+
+.signInError {
+    margin: 25px 0px;
+    color: red;
+    font-size: 18px;
+    text-align: center;
 }

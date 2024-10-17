@@ -1,0 +1,27 @@
+/* Notification container */
+/* When active, it will slide down */
+
+.notification-container {
+    background-color: #f39c12;
+    position: absolute;
+    top: -60px;
+    left: 100px;
+    right: 100px;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 18px;
+    border: 2px solid red;
+    font-family: Arial, sans-serif;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: top 0.5s ease-in-out;
+    z-index: 1000;
+    height: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.notification-container.show {
+    top: 0px;
+}

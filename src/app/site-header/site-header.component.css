@@ -2,14 +2,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 12vh;
-    padding: 0px 20px 0px 20px;
+    height: 10vh;
+    /* Use 100vw to cover the viewport width */
+    margin: 0px;
+    box-sizing: border-box;
+    padding: 0px 20px;
     border-bottom: 2px solid #818285;
 }
 
 .search-container {
     display: flex;
     align-items: center;
+    max-width: 20px;
 }
 
 .fa-solid {
@@ -42,10 +46,29 @@
 }
 
 .cart {
-    margin-right: 50px;
+    margin: 0px 0px 0px 1000px;
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.cart-user {
+    display: flex;
+    justify-content: space-evenly; /* Ensure equal spacing */
+    align-items: center; /* Center elements vertically */
+    padding: 0 10px; /* Add some padding if necessary */
+    margin: 0px 10px 0px 550px;
+}
+
+.cart-user > * {
+    padding: 0px 10px 0px 20px;
+}
+
+.cart-user h3,
+.cart-user .shopping {
+    margin: 0;
+    flex: 1; /* Distribute space evenly */
+    text-align: center; /* Center text within each element */
 }
 
 .cart h3 {
@@ -77,6 +100,16 @@
     color: red;
 }
 
+.cart-user-count {
+    font-size: 15px;
+    position: absolute;
+    left: 55px;
+    bottom: 20px;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: red;
+}
+
 a.active {
     padding-bottom: 2px;
     border-bottom: 3px solid blue;
@@ -86,7 +119,7 @@ a.active {
     display: flex;
     align-items: center;
     margin-right: 25px;
-    margin-left: -500px;
+    margin-left: 0px;
 }
 
 .usertoggle {
@@ -98,7 +131,7 @@ a.active {
 }
 
 .right * {
-    margin-left: 25px;
+    margin-left: 5px;
 }
 
 .usertoggle img {

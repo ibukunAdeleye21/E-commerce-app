@@ -33,8 +33,6 @@ export class SiteHeaderComponent implements OnInit {
   signOut() {
     this.userService.signOut();
     this.showMenu = false;
-    this.userService.isUserLoggedIn = false;
+    this.userService.isUserLoggedIn.next(false);
   }
-
-
 }

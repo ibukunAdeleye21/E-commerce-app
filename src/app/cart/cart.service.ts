@@ -13,12 +13,8 @@ export class CartService {
 
   constructor(
     private http: HttpClient,
-    private injector: Injector
+    private injector: Injector,
   ) { }
-
-  private get userSvc(): UserService {
-    return this.injector.get(UserService); // Lazy injection of UserService
-  }
 
   getCart() {
     return this.cart.asObservable();
@@ -33,15 +29,14 @@ export class CartService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return headers;
   }
-  
 
   private findLineItem(product: IProduct): IProductCart | undefined {
     const currentCart = this.cart.getValue();
     return currentCart.find((li) => li.product.id === product.id)
   }
 
-  add(product: IProduct) {
-    if (this.userSvc.isUserLoggedIn == true) {
+  add(product: IProduct, isUserLoggedIn: boolean) {
+    if (isUserLoggedIn == true) {
       const token = this.getToken();
 
       const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
@@ -68,7 +63,9 @@ export class CartService {
         next: (response) => {
           // Handle successful response (200 OK)
           console.log('Cart item added successfully', response);
+          console.log('Cart: ', this.cart);
           // You can also perform any additional actions here, like showing a success message
+
         },
         error: (error) => {
           // Handle errors
@@ -92,9 +89,9 @@ export class CartService {
     }
   }
 
-  addFromProductDetails(product: IProduct, currentQty: number)
+  addFromProductDetails(product: IProduct, currentQty: number, isUserLoggedIn: boolean)
   {
-    if (this.userSvc.isUserLoggedIn == true)
+    if (isUserLoggedIn)
     {
       const token = this.getToken();
 
@@ -151,43 +148,57 @@ export class CartService {
     
   }
 
-  remove(item: IProductCart) {
-    const token = this.getToken();
+  remove(item: IProductCart, isUserLoggedIn: boolean) {
+    if (isUserLoggedIn) {
+      const token = this.getToken();
 
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
 
-    const currentCart = this.cart.getValue();
-    const updatedCart = currentCart.filter((li) => li.product.id !== item.product.id);
+      const currentCart = this.cart.getValue();
+      const updatedCart = currentCart.filter((li) => li.product.id !== item.product.id);
 
-    this.cart.next([...updatedCart]);
+      this.cart.next([...updatedCart]);
 
-    const allProductId = item.product.id;
-    this.http.delete(`${this.baseUrl}/cart/remove-product/${allProductId}`, { headers }).subscribe({
-      next: () => {
-        console.log('Cart removed successfully');
-        
-      },
-      error: (error) => {
-        console.error('Failed to remove cart:', error);
-      }
-    });
+      const allProductId = item.product.id;
+      this.http.delete(`${this.baseUrl}/cart/remove-product/${allProductId}`, { headers }).subscribe({
+        next: () => {
+          console.log('Cart removed successfully');
+          
+        },
+        error: (error) => {
+          console.error('Failed to remove cart:', error);
+        }
+      });
+    }
+    else {
+      const currentCart = this.cart.getValue();
+      const updatedCart = currentCart.filter((li) => li.product.id !== item.product.id);
+
+      this.cart.next([...updatedCart]);
+    }
   }
 
-  empty() {
-    this.cart.next([]);
+  empty(isUserLoggedIn: boolean) {
+    if (isUserLoggedIn) {
+      this.cart.next([]);
 
-    const token = this.getToken();
+      const token = this.getToken();
 
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
 
-    this.http.delete(`${this.baseUrl}/cart/remove-all-products`, { headers }).subscribe({
-      next: () => {
-        console.log('All cart items removed successfully');
-      },
-      error: (error) => {
-        console.error('Failed to remove all cart items:', error);
-      }
-    });
+      this.http.delete(`${this.baseUrl}/cart/remove-all-products`, { headers }).subscribe({
+        next: () => {
+          console.log('All cart items removed successfully');
+        },
+        error: (error) => {
+          console.error('Failed to remove all cart items:', error);
+        }
+      });
+    }
+    else {
+      this.cart.next([]);
+    }
+    
   }
 
   storeCartAfterLogin() {
@@ -195,10 +206,10 @@ export class CartService {
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
 
-    // Make a GET request to retrieve the cart for the logged-in user
+    //Make a GET request to retrieve the cart for the logged-in user
     this.http.get<any[]>(`${this.baseUrl}/cart/get-cartproductdetails`, {headers}).subscribe({
       next: (cartItemsFromBackend: any[]) => {
-        // Transform the cartItemsFromBackend to match the IProductCart structure
+        //Transform the cartItemsFromBackend to match the IProductCart structure
         const cartItemsWithProductDetails: IProductCart[] = cartItemsFromBackend.map(item => {
           const product: IProduct = {
             id: item.productId,
@@ -218,13 +229,37 @@ export class CartService {
           };
         });
 
-        // Update the BehaviourSubject with the transformed cart items
+        //Update the BehaviourSubject with the transformed cart items
         this.cart.next(cartItemsWithProductDetails);
         console.log('Cart loaded after login:', cartItemsWithProductDetails);
       },
       error: (error) => {
         console.error('Failed to load cart after login:', error);
+
+        //Handle the error based on the message from the backend
+        if (error.status === 404) {
+          if (error.error === 'Cart is inactive') {
+            //Cart is inactive; notify the frontend that the cart is empty
+            console.log('Cart is inactive. Treating as empty cart.');
+            //Update the cart BehaviorSubject with an empty array to indicate the empty cart
+            this.cart.next([]);
+
+          } else if (error.error === 'Cart is empty') {
+            //Cart is empty; handle the empty cart scenario
+            console.log('Cart is empty.');
+            this.cart.next([]);
+            
+          } else if (error.error === 'Cart does not exist') {
+            //Cart does not exist; handle accordingly (e.g., show an error message)
+            console.log('Cart does not exist.');
+            this.cart.next([]);
+          }
+        }
       }
     });
+  }
+
+  clearCart() {
+    this.cart.next([]);
   }
 }

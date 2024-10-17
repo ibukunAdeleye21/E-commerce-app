@@ -1,1 +1,44 @@
-<p>order works!</p>
+<div class="container" *ngIf="isUserLoggedIn">
+    <div *ngIf="orders.length > 0">
+        <h1>Order History</h1>
+    
+        <div *ngFor="let order of orders" class="order-container">
+            <div class="order-info">
+                <h2>Order #{{ order.id }}</h2>
+                <p><strong>Order Date:</strong> {{ order.orderDate | date: 'mediumDate' }}</p>
+                <p><strong>Total Amount:</strong> {{ order.totalAmount | currency }}</p>
+                <p><strong>Status:</strong> {{ order.status }}</p>
+            </div>
+    
+            <h3>Items in this order:</h3>
+    
+            <div class="cart-items">
+                <div *ngFor="let item of order.cartItems" class="cart-item">
+                    <img [src]="item.productImage" alt="{{ item.productTitle }}" class="product-image">
+                    <div class="cart-item-details">
+                        <h4>{{ item.productTitle }}</h4>
+                        <p>{{ item.productDescription }}</p>
+                        <p><strong>Category:</strong> {{ item.productCategory }}</p>
+                        <p><strong>Price:</strong> {{ item.price | currency }}</p>
+                        <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+                        <p><strong>Amount:</strong> {{ item.amount | currency }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Show a message if there are no orders -->
+<div *ngIf="!isUserLoggedIn || orders.length == 0">
+    <div class="empty-order">
+        <div class="empty-order-content">
+            <h5>My Order(s)</h5>
+            <img src="/assets/images/empty-order.gif"
+                alt="Empty Cart">
+            <h4>Your order is empty!</h4>
+            <h6>You have no completed orders</h6>
+        </div>
+    </div>
+</div>
